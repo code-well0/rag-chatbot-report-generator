@@ -20,7 +20,7 @@ A Retrieval-Augmented Generation (RAG) application built with:
 - FAISS
 - HuggingFace Embeddings
 
-## 📊 Evaluation
+## Evaluation
 
 Retrieval performance was evaluated using a curated set of
 question–document pairs on user-uploaded PDFs.
