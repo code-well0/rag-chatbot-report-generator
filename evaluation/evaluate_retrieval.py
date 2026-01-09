@@ -13,19 +13,19 @@ with open("eval_questions.json", "r") as f:
 PDF_DIR = "uploaded_pdfs"
 
 if not os.path.exists(PDF_DIR) or len(os.listdir(PDF_DIR)) == 0:
-    raise RuntimeError("❌ No PDFs found in uploaded_pdfs/. Upload PDFs via the app first.")
+    raise RuntimeError("No PDFs found in uploaded_pdfs/. Upload PDFs via the app first.")
 
 loader = PyPDFDirectoryLoader(PDF_DIR)
 docs = loader.load()
 
 if len(docs) == 0:
-    raise RuntimeError("❌ PDFs found but no readable text (scanned PDFs not supported).")
+    raise RuntimeError("PDFs found but no readable text (scanned PDFs not supported).")
 
 splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 final_docs = splitter.split_documents(docs)
 
 if len(final_docs) == 0:
-    raise RuntimeError("❌ Text splitting failed.")
+    raise RuntimeError("Text splitting failed.")
 
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/all-MiniLM-L6-v2",
@@ -57,4 +57,4 @@ for item in eval_data:
     print("-" * 50)
 
 accuracy = correct / len(eval_data)
-print(f"\n✅ Top-{TOP_K} Retrieval Accuracy: {accuracy:.2%}")
+print(f"\n Top-{TOP_K} Retrieval Accuracy: {accuracy:.2%}")
